@@ -1,0 +1,52 @@
+{
+  "site": {
+    "title": "Coding with AI",
+    "subtitle": "Free guides by George Hanu",
+    "pitch": "I teach developers to build software with AI, from useful scripts to app features. Small examples, explained clearly.",
+    "url": "https://georgehanu.github.io/",
+    "x": "https://x.com/georgehanu",
+    "github": "https://github.com/georgehanu"
+  },
+
+  "topics": [
+    { "id": "coding-agents", "label": "Coding agents" },
+    { "id": "agents", "label": "Agents" },
+    { "id": "tool-calling", "label": "Tool calling" },
+    { "id": "workflows", "label": "Workflows" },
+    { "id": "structured-output", "label": "Structured output" },
+    { "id": "evaluation", "label": "Evaluation" },
+    { "id": "safety", "label": "Safety" },
+    { "id": "human-in-the-loop", "label": "Human in the loop" },
+    { "id": "cost", "label": "Cost" },
+    { "id": "prompting", "label": "Prompting" },
+    { "id": "planning", "label": "Planning" },
+    { "id": "ux", "label": "UX" }
+  ],
+
+  "start": [
+    { "if": "You already use a coding agent", "then": "and want better results from it", "guide": "beyond-it-works" },
+    { "if": "You want to know how agents work", "then": "by building a small one yourself", "guide": "the-agent-loop" },
+    { "if": "You want AI features in your app", "then": "that people can actually trust", "guide": "ai-buttons" }
+  ],
+
+  "series": [
+    {
+      "id": "use",
+      "title": "Working with coding agents",
+      "blurb": "Get reviewable, checkable work out of Claude Code, Codex and friends.",
+      "guides": ["beyond-it-works"]
+    },
+    {
+      "id": "inside",
+      "title": "How agents work",
+      "blurb": "Open the box: the model, the tools and the loop around them.",
+      "guides": ["the-agent-loop"]
+    },
+    {
+      "id": "apps",
+      "title": "AI in real apps",
+      "blurb": "Small AI features with schemas, checks and a person in charge.",
+      "guides": ["ai-buttons"]
+    }
+  ]
+}

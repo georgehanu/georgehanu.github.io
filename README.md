@@ -1,0 +1,21 @@
+# Coding with AI
+
+**[georgehanu.github.io](https://georgehanu.github.io/)**: every free guide by George Hanu ([@georgehanu](https://x.com/georgehanu)) in one place, grouped into series, with a [searchable list of every lesson](https://georgehanu.github.io/lessons/).
+
+| Series | Guide | |
+| --- | --- | --- |
+| [Working with coding agents](https://georgehanu.github.io/series/use/) | [Beyond "It Works"](https://georgehanu.github.io/beyond-it-works/) | A workflow for getting reviewable changes out of AI coding agents |
+| [How agents work](https://georgehanu.github.io/series/inside/) | [The Agent Loop](https://georgehanu.github.io/the-agent-loop/) | Build a mini coding agent in TypeScript, no framework |
+| [AI in real apps](https://georgehanu.github.io/series/apps/) | [AI Buttons](https://georgehanu.github.io/ai-buttons/) | Small AI features in a real web app, built as workflows |
+
+## Adding a guide
+
+Every page comes from the files in [`data/`](data/). The HTML, `sitemap.xml`, `robots.txt` and the share images are generated, so don't edit them by hand.
+
+1. Add `data/guides/<id>.json` (copy an existing guide). The `id` inside must match the file name. Give each lesson 1 to 3 topics from the list below, and a `page` relative to the guide's `url` if it has its own page.
+2. Add the id to a series in [`data/site.json`](data/site.json), or add a new series. Its position in the list makes it Part 1, Part 2, and so on.
+3. Run `npm install` once, then `npm run check`. It checks the data, rebuilds the site and its share images, and checks that every link answers.
+
+**Topics** (fixed): `coding-agents`, `agents`, `tool-calling`, `workflows`, `structured-output`, `evaluation`, `safety`, `human-in-the-loop`, `cost`, `prompting`, `planning`, `ux`.
+
+The home page gets a **Latest** section, the 3 newest guides by `published`, automatically once there are 5 or more guides.

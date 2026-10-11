@@ -1,0 +1,20 @@
+{
+  "id": "beyond-it-works",
+  "title": "Beyond \"It Works\"",
+  "promise": "A practical workflow for building features with AI coding agents: from a vague request to a reviewable change.",
+  "url": "https://georgehanu.github.io/beyond-it-works/",
+  "code": "https://github.com/georgehanu/beyond-it-works",
+  "format": "PDF guide + templates",
+  "facts": ["26 pages", "8 prompts", "5 templates"],
+  "level": "You already use a coding agent",
+  "accent": "#0f766e",
+  "published": "2026-09-21",
+  "lessons": [
+    { "title": "Define what done means", "topics": ["planning", "coding-agents"] },
+    { "title": "Give the agent useful context", "topics": ["prompting", "coding-agents"] },
+    { "title": "Bound the plan, then build", "topics": ["planning", "coding-agents"] },
+    { "title": "Recover without random rewrites", "topics": ["evaluation", "coding-agents"] },
+    { "title": "Review evidence, then the change", "topics": ["evaluation", "coding-agents"] },
+    { "title": "Leave a usable handoff", "topics": ["human-in-the-loop", "coding-agents"] }
+  ]
+}

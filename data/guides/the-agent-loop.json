@@ -1,0 +1,21 @@
+{
+  "id": "the-agent-loop",
+  "title": "The Agent Loop",
+  "promise": "Build a mini coding agent in TypeScript, no framework. It plans, reads your code, asks before it edits, and checks its work.",
+  "url": "https://georgehanu.github.io/the-agent-loop/",
+  "code": "https://github.com/georgehanu/the-agent-loop",
+  "format": "Lessons + code",
+  "facts": ["TypeScript", "No framework", "Runs without an API key"],
+  "level": "Comfortable with TypeScript",
+  "accent": "#c2410c",
+  "published": "2026-10-11",
+  "lessons": [
+    { "title": "Text in, text out", "page": "01-text-in-text-out.html", "topics": ["tool-calling", "prompting"] },
+    { "title": "Your first real tool call", "page": "02-first-tool-call.html", "topics": ["tool-calling"] },
+    { "title": "Keep going until it's done", "page": "03-the-loop.html", "topics": ["agents", "tool-calling"] },
+    { "title": "Give it a to-do list", "page": "04-todo-list.html", "topics": ["planning", "agents"] },
+    { "title": "Guardrails: the boring code that matters", "page": "05-guardrails.html", "topics": ["safety", "agents"] },
+    { "title": "A mini coding agent", "page": "06-mini-coding-agent.html", "topics": ["coding-agents", "agents"] },
+    { "title": "Do you even need an agent?", "page": "07-do-you-need-an-agent.html", "topics": ["workflows", "agents"] }
+  ]
+}

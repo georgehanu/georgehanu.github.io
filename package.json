@@ -1,0 +1,13 @@
+{
+  "name": "georgehanu.github.io",
+  "private": true,
+  "type": "module",
+  "description": "Coding with AI: the index of George Hanu's free guides.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs && node scripts/check.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.4"
+  }
+}
