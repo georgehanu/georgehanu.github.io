@@ -19,3 +19,9 @@ Every page comes from the files in [`data/`](data/). The HTML, `sitemap.xml`, `r
 **Topics** (fixed): `coding-agents`, `agents`, `tool-calling`, `workflows`, `structured-output`, `evaluation`, `safety`, `human-in-the-loop`, `cost`, `prompting`, `planning`, `ux`.
 
 The home page gets a **Latest** section, the 3 newest guides by `published`, automatically once there are 5 or more guides.
+
+## Share images
+
+Every build draws the link previews (1200×630) from the same data, with one template in [`scripts/og.mjs`](scripts/og.mjs): `og.png` for the home page (and every page without its own image), `og/<series>.png` for each series, and `og/guides/<id>.png` for each guide. The guide sites point their `og:image` at their file here, for the guide's home page and every lesson, so keep those paths stable.
+
+The image shows the title and a short line from `"og": { "description": "…" }` in `data/site.json` (site and each series) or the guide's JSON. Without it, it falls back to the subtitle, the series blurb or the guide's promise. `npm run check` fails if an image is missing and warns when a guide page doesn't use its image.

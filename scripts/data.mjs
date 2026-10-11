@@ -28,6 +28,17 @@ const isDate = (value) => {
 // A lesson page is relative to its guide's url: no scheme ("https:", "mailto:") and no leading slash.
 const isAbsolute = (page) => /^[a-z][a-z0-9+.-]*:/i.test(page) || /^[/\\]/.test(page);
 const show = (value) => (value === undefined ? "missing" : JSON.stringify(value));
+// Optional share-image words: { "og": { "description": "…" } }. Without it the image uses the
+// blurb (series), the promise (guide) or the subtitle (site).
+const OG_KEYS = ["description"];
+function ogProblems(og, where) {
+  if (og === undefined) return [];
+  if (typeof og !== "object" || og === null || Array.isArray(og)) return [`${where}: og must be an object like { "description": "…" }`];
+  return [
+    ...Object.keys(og).filter((key) => !OG_KEYS.includes(key)).map((key) => `${where}: og.${key} is not a known field (use ${OG_KEYS.join(", ")})`),
+    ...(og.description !== undefined && !isText(og.description) ? [`${where}: og.description must be a short text`] : []),
+  ];
+}
 
 export function loadData() {
   const problems = [];
@@ -53,6 +64,7 @@ export function loadData() {
     for (const key of ["title", "subtitle", "pitch"]) if (!isText(site[key])) problems.push(`data/site.json: site.${key} is missing`);
     for (const key of ["url", "x", "github"]) if (!isWebUrl(site[key])) problems.push(`data/site.json: site.${key} must be an http(s) URL`);
     if (isWebUrl(site.url) && !site.url.endsWith("/")) problems.push('data/site.json: site.url must end with "/"');
+    problems.push(...ogProblems(site.og, "data/site.json: site"));
   }
 
   const topicById = new Map();
@@ -85,6 +97,7 @@ export function loadData() {
     for (const key of ["url", "code"]) if (!isWebUrl(guide[key])) problems.push(`${file}: ${key} must be an http(s) URL (it is ${show(guide[key])})`);
     if (!Array.isArray(guide.facts) || !guide.facts.every(isText)) problems.push(`${file}: facts must be a list of short texts`);
     if (!isColour(guide.accent)) problems.push(`${file}: accent must be a hex colour like "#0f766e" (it is ${show(guide.accent)})`);
+    problems.push(...ogProblems(guide.og, file));
     if (!isDate(guide.published)) problems.push(`${file}: published must be a real date written YYYY-MM-DD (it is ${show(guide.published)})`);
 
     const lessons = Array.isArray(guide.lessons) ? guide.lessons : [];
@@ -121,6 +134,7 @@ export function loadData() {
     else if (seriesIds.has(series.id)) problems.push(`${where}: duplicate series id`);
     else seriesIds.add(series.id);
     for (const key of ["title", "blurb"]) if (!isText(series?.[key])) problems.push(`${where}: ${key} is missing`);
+    problems.push(...ogProblems(series?.og, where));
     const ids = Array.isArray(series?.guides) ? series.guides : [];
     if (!ids.length) problems.push(`${where}: guides must list at least one guide id`);
     const seen = new Set();
@@ -163,7 +177,7 @@ export function loadData() {
       }));
       return guide;
     });
-    const result = { id: s.id, title: s.title, blurb: s.blurb, guides };
+    const result = { id: s.id, title: s.title, blurb: s.blurb, og: s.og, guides };
     for (const guide of guides) guide.series = result;
     return result;
   });

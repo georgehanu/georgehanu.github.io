@@ -5,7 +5,8 @@
     "pitch": "I teach developers to build software with AI, from useful scripts to app features. Small examples, explained clearly.",
     "url": "https://georgehanu.github.io/",
     "x": "https://x.com/georgehanu",
-    "github": "https://github.com/georgehanu"
+    "github": "https://github.com/georgehanu",
+    "og": { "description": "Free practical guides and lessons for building software with AI" }
   },
 
   "topics": [
@@ -34,18 +35,21 @@
       "id": "use",
       "title": "Working with coding agents",
       "blurb": "Get reviewable, checkable work out of Claude Code, Codex and friends.",
+      "og": { "description": "Practical workflows for getting reviewable changes out of coding agents" },
       "guides": ["beyond-it-works"]
     },
     {
       "id": "inside",
       "title": "How agents work",
       "blurb": "Open the box: the model, the tools and the loop around them.",
+      "og": { "description": "Small examples that explain tools, loops and agent behavior" },
       "guides": ["the-agent-loop"]
     },
     {
       "id": "apps",
       "title": "AI in real apps",
       "blurb": "Small AI features with schemas, checks and a person in charge.",
+      "og": { "description": "Small AI features built as practical workflows inside real software" },
       "guides": ["ai-buttons"]
     }
   ]

@@ -2,6 +2,7 @@
   "id": "the-agent-loop",
   "title": "The Agent Loop",
   "promise": "Build a mini coding agent in TypeScript, no framework. It plans, reads your code, asks before it edits, and checks its work.",
+  "og": { "description": "Build a mini coding agent in TypeScript and understand how the loop works" },
   "url": "https://georgehanu.github.io/the-agent-loop/",
   "code": "https://github.com/georgehanu/the-agent-loop",
   "format": "Lessons + code",

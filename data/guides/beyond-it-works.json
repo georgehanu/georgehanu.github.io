@@ -2,6 +2,7 @@
   "id": "beyond-it-works",
   "title": "Beyond \"It Works\"",
   "promise": "A practical workflow for building features with AI coding agents: from a vague request to a reviewable change.",
+  "og": { "description": "A practical workflow for getting reviewable changes out of a coding agent" },
   "url": "https://georgehanu.github.io/beyond-it-works/",
   "code": "https://github.com/georgehanu/beyond-it-works",
   "format": "PDF guide + templates",

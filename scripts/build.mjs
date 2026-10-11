@@ -9,8 +9,10 @@
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { loadData, root } from "./data.mjs";
+import { renderShareImage, seriesImage, shareCards } from "./og.mjs";
 
 const { site, topics, series, guides, start } = loadData();
+const cards = shareCards({ site, series, guides }); // the share images: what each says, and its alt text
 
 const LATEST_FROM = 5; // the home page gets a "Latest" section once there are this many guides
 
@@ -28,7 +30,8 @@ const handle = "@" + new URL(site.x).pathname.split("/").filter(Boolean)[0];
 const arrow = '<span aria-hidden="true">→</span>';
 
 // ── layout shared by every page ─────────────────────────────────────────────
-function page({ path, title, socialTitle = title, description, image = "/og.png", imageAlt, main, script = "", noindex = false }) {
+// A page without its own share image gets the home one, /og.png.
+function page({ path, title, socialTitle = title, description, image = "/og.png", imageAlt = cards.home.alt, main, script = "", noindex = false }) {
   const url = absolute(path);
   const img = absolute(image);
   const here = (href) => (href === path ? ' aria-current="page"' : "");
@@ -129,14 +132,11 @@ const seriesCard = (s) => `<article class="series-card">
       <a class="more" href="${seriesPath(s)}">Browse the series<span class="sr-only">: ${esc(s.title)}</span> ${arrow}</a>
     </article>`;
 
-const homeBoxes = [...new Set([...start.map((p) => p.guide), ...guides])].slice(0, 3);
-
 const home = page({
   path: "/",
   title: `${site.title} · George Hanu`,
   socialTitle: `${site.title} · ${site.subtitle}`,
   description: `${site.pitch} ${plural(guides.length, "free guide")}, ${plural(lessonCount(guides), "lesson")}.`,
-  imageAlt: `${site.title}, ${site.subtitle.replace(/^./, (c) => c.toLowerCase())}: ${homeBoxes.map((g) => g.title).join(", ")}`,
   main: [
     `  <section class="hero">
     <p class="eyebrow">${esc(site.subtitle)}</p>
@@ -184,6 +184,7 @@ const guideCard = (g) => `<article class="guide" id="${g.id}" style="--accent:${
     </article>`;
 
 function seriesPage(s) {
+  const share = cards.series.find((c) => c.file === seriesImage(s));
   const others = series.filter((other) => other !== s);
   const more = others.length
     ? `
@@ -199,8 +200,8 @@ function seriesPage(s) {
     path: seriesPath(s),
     title: `${s.title} · ${site.title}`,
     description: `${s.blurb} ${plural(s.guides.length, "free guide")}, ${plural(lessonCount(s.guides), "lesson")}, by George Hanu.`,
-    image: `/og/${s.id}.png`,
-    imageAlt: `${s.title}, a series of free guides by George Hanu: ${s.guides.slice(0, 3).map((g) => g.title).join(", ")}`,
+    image: `/${share.file}`,
+    imageAlt: share.alt,
     main: `  <nav class="crumbs" aria-label="Breadcrumb">
     <ol><li><a href="/">Home</a></li><li aria-current="page">${esc(s.title)}</li></ol>
   </nav>
@@ -324,7 +325,6 @@ const lessonsPage = page({
   path: "/lessons/",
   title: `All lessons · ${site.title}`,
   description: `Every lesson from George Hanu's free guides on coding with AI, in one list: ${plural(totalLessons, "lesson")} from ${plural(guides.length, "guide")}. Search, or filter by series and topic.`,
-  imageAlt: `${site.title}, ${site.subtitle.replace(/^./, (c) => c.toLowerCase())}`,
   main: `  <section class="hero">
     <p class="eyebrow">${esc(site.subtitle)}</p>
     <h1>All lessons</h1>
@@ -364,7 +364,6 @@ const notFound = page({
   path: "/404.html",
   title: `Page not found · ${site.title}`,
   description: `That page doesn't exist. Every free guide and lesson on ${site.title} is one click away.`,
-  imageAlt: `${site.title}, ${site.subtitle.replace(/^./, (c) => c.toLowerCase())}`,
   noindex: true,
   main: `  <section class="hero">
     <p class="eyebrow">404</p>
@@ -413,93 +412,9 @@ write("robots.txt", robots);
 write(".nojekyll", "");
 
 // ── share images (1200×630) ─────────────────────────────────────────────────
-// The look of the original og.png: dark background, a byline, a big title, one line of
-// subtitle, and up to three outlined boxes with guide titles in each guide's accent.
-// Text is measured by rendering it, so a long title shrinks or wraps instead of overflowing.
-
-let sharp;
-try {
-  ({ default: sharp } = await import("sharp"));
-} catch {
-  console.error("sharp is missing: run npm install once, then build again.");
-  process.exit(1);
-}
-
-const FONT = "Inter, Segoe UI, Arial, sans-serif";
-const measured = new Map();
-async function widthAt100(text, weight) {
-  const key = `${weight}|${text}`;
-  if (!measured.has(key)) {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${text.length * 110 + 200}" height="160"><text x="40" y="120" font-family="${FONT}" font-size="100" font-weight="${weight}" fill="#fff">${esc(text)}</text></svg>`;
-    const { info } = await sharp(Buffer.from(svg)).trim().toBuffer({ resolveWithObject: true });
-    measured.set(key, info.width);
-  }
-  return measured.get(key);
-}
-
-// The largest size (within `size`) at which the text fits `width` on one line; failing that,
-// on two balanced lines (within `wrap`); failing that, one line at the smallest size, cut short.
-async function fit(text, { weight, width, size: [max, min], wrap }) {
-  const sizeFor = async (line) => Math.floor((width * 100) / (await widthAt100(line, weight)));
-  const one = Math.min(max, await sizeFor(text));
-  if (one >= min) return { size: one, lines: [text] };
-  const words = text.split(" ");
-  if (wrap && words.length > 1) {
-    let best;
-    for (let i = 1; i < words.length; i++) {
-      const lines = [words.slice(0, i).join(" "), words.slice(i).join(" ")];
-      const size = Math.min(await sizeFor(lines[0]), await sizeFor(lines[1]));
-      if (!best || size > best.size) best = { size, lines };
-    }
-    if (best.size >= wrap[1]) return { size: Math.min(wrap[0], best.size), lines: best.lines };
-  }
-  let cut = text;
-  while (cut.length > 1 && (await sizeFor(`${cut}…`)) < min) cut = cut.slice(0, -1).trimEnd();
-  return { size: min, lines: [`${cut}…`] };
-}
-
-const svgText = (x, y, size, weight, fill, content) =>
-  `<text x="${x}" y="${y}" font-family="${FONT}" font-size="${size}" font-weight="${weight}" fill="${fill}">${esc(content)}</text>`;
-
-async function shareImage(file, { title, subtitle, boxes }) {
-  const t = await fit(title, { weight: 800, width: 1040, size: [104, 72], wrap: [84, 52] });
-  const s = await fit(subtitle, { weight: 400, width: 1040, size: [34, 24] });
-  // Stack up from the boxes, so a one-line title gives exactly the original layout.
-  const titleLine = Math.round(t.size * 1.04);
-  const subtitleY = 350;
-  const titleLastY = subtitleY - Math.round(s.size * 0.73 + 55);
-  const titleY = titleLastY - (t.lines.length - 1) * titleLine;
-  const bylineY = Math.round(titleY - t.size * 0.73 - 44);
-
-  const boxSvg = [];
-  for (const [i, guide] of boxes.slice(0, 3).entries()) {
-    const x = 80 + i * 350;
-    const f = await fit(guide.title, { weight: 700, width: 272, size: [30, 24], wrap: [26, 20] });
-    const line = Math.round(f.size * 1.2);
-    const y = Math.round(486 + f.size * 0.36 - ((f.lines.length - 1) * line) / 2);
-    boxSvg.push(
-      `<rect x="${x}" y="430" width="320" height="110" rx="18" fill="#1d1d21" stroke="${guide.accent}" stroke-width="3"/>` +
-        f.lines.map((l, n) => svgText(x + 24, y + n * line, f.size, 700, "#ecebe8", l)).join(""),
-    );
-  }
-
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#121214"/>
-  ${svgText(80, bylineY, 30, 600, "#a39f97", "George Hanu · free guides")}
-  ${t.lines.map((l, n) => svgText(80, titleY + n * titleLine, t.size, 800, "#ecebe8", l)).join("\n  ")}
-  ${svgText(80, subtitleY, s.size, 400, "#cfccc6", s.lines[0])}
-  ${boxSvg.join("\n  ")}
-</svg>`;
-  const full = join(root, file);
-  mkdirSync(dirname(full), { recursive: true });
-  await sharp(Buffer.from(svg)).png().toFile(full);
-  written.push(file);
-}
-
-// The home image's subtitle is the last sentence of the pitch ("Small examples, explained clearly.").
-const tagline = site.pitch.split(/(?<=[.!?])\s+/).at(-1);
-await shareImage("og.png", { title: site.title, subtitle: tagline, boxes: homeBoxes });
-for (const s of series) await shareImage(`og/${s.id}.png`, { title: s.title, subtitle: s.blurb, boxes: s.guides });
+// One template for all of them, in scripts/og.mjs: og.png, og/<series>.png, og/guides/<guide>.png.
+// The guide sites point their og:image at the og/guides/ files, so keep those paths stable.
+for (const share of cards.all) write(share.file, await renderShareImage(share));
 
 const pages = written.filter((f) => f.endsWith(".html")).length;
 const images = written.filter((f) => f.endsWith(".png")).length;

@@ -2,6 +2,7 @@
   "id": "ai-buttons",
   "title": "AI Buttons",
   "promise": "Five small AI features in a real support-desk app, each built as a workflow you can read, test and trust.",
+  "og": { "description": "Small AI features for real apps, built as workflows with a human in the loop" },
   "url": "https://georgehanu.github.io/ai-buttons/",
   "code": "https://github.com/georgehanu/ai-buttons",
   "format": "Lessons + web app",
