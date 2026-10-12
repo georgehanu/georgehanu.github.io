@@ -1,0 +1,22 @@
+{
+  "id": "harden-your-agent",
+  "title": "Harden Your Agent",
+  "promise": "Six defences a real agent needs, each added to a small TypeScript agent and proved by a test you can run.",
+  "og": { "description": "Your agent works. Now make it safe to ship: six defences, each proved by a test" },
+  "url": "https://georgehanu.github.io/harden-your-agent/",
+  "code": "https://github.com/georgehanu/harden-your-agent",
+  "format": "Lessons + web app",
+  "facts": ["TypeScript", "Switchable defences", "Runs without an API key"],
+  "level": "You've built an agent, or read The Agent Loop",
+  "accent": "#b91c1c",
+  "published": "2026-10-11",
+  "lessons": [
+    { "title": "Where untrusted text gets in", "page": "01-where-untrusted-text-gets-in.html", "topics": ["safety", "agents"] },
+    { "title": "Keep the agent on task", "page": "02-keep-the-agent-on-task.html", "topics": ["safety", "structured-output", "agents"] },
+    { "title": "What the screen and the fetch tool can give away", "page": "03-the-screen-and-the-fetch-tool.html", "topics": ["safety", "ux"] },
+    { "title": "Acting as whom", "page": "04-acting-as-whom.html", "topics": ["safety", "agents"] },
+    { "title": "Tools that must not run twice", "page": "05-tools-that-must-not-run-twice.html", "topics": ["safety", "tool-calling"] },
+    { "title": "Memory you can trust", "page": "06-memory-you-can-trust.html", "topics": ["safety", "agents"] },
+    { "title": "The hardening test suite", "page": "07-the-hardening-test-suite.html", "topics": ["evaluation", "safety"] }
+  ]
+}

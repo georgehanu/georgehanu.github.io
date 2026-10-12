@@ -41,9 +41,9 @@
     {
       "id": "inside",
       "title": "How agents work",
-      "blurb": "Open the box: the model, the tools and the loop around them.",
-      "og": { "description": "Small examples that explain tools, loops and agent behavior" },
-      "guides": ["the-agent-loop"]
+      "blurb": "Open the box: build the loop, then make it safe to ship.",
+      "og": { "description": "Build a small agent, then add the defences a real one needs" },
+      "guides": ["the-agent-loop", "harden-your-agent"]
     },
     {
       "id": "apps",
