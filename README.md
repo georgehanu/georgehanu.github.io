@@ -5,6 +5,7 @@
 | Series | Guide | |
 | --- | --- | --- |
 | [Working with coding agents](https://georgehanu.github.io/series/use/) | [Beyond "It Works"](https://georgehanu.github.io/beyond-it-works/) | A workflow for getting reviewable changes out of AI coding agents |
+| | [Prove It](https://georgehanu.github.io/prove-it/) | Skills and hooks that make your coding agent prove its work |
 | [How agents work](https://georgehanu.github.io/series/inside/) | [The Agent Loop](https://georgehanu.github.io/the-agent-loop/) | Build a mini coding agent in TypeScript, no framework |
 | | [Harden Your Agent](https://georgehanu.github.io/harden-your-agent/) | Six defences a real agent needs, each proved by a test |
 | [AI in real apps](https://georgehanu.github.io/series/apps/) | [AI Buttons](https://georgehanu.github.io/ai-buttons/) | Small AI features in a real web app, built as workflows |

@@ -36,7 +36,7 @@
       "title": "Working with coding agents",
       "blurb": "Get reviewable, checkable work out of Claude Code, Codex and friends.",
       "og": { "description": "Practical workflows for getting reviewable changes out of coding agents" },
-      "guides": ["beyond-it-works"]
+      "guides": ["beyond-it-works", "prove-it"]
     },
     {
       "id": "inside",

@@ -1,0 +1,22 @@
+{
+  "id": "prove-it",
+  "title": "Prove It",
+  "promise": "Your coding agent says it's done. Make it prove it. A Claude Code plugin of skills and hooks, plus seven short lessons.",
+  "og": { "description": "Your coding agent says it's done. Make it prove it: skills and hooks you install in two commands" },
+  "url": "https://georgehanu.github.io/prove-it/",
+  "code": "https://github.com/georgehanu/prove-it",
+  "format": "Plugin + lessons",
+  "facts": ["Claude Code plugin", "Works with Codex", "Install in 2 commands"],
+  "level": "You already use a coding agent",
+  "accent": "#15803d",
+  "published": "2026-10-18",
+  "lessons": [
+    { "title": "Done means proven", "page": "01-done-means-proven.html", "topics": ["coding-agents", "evaluation"] },
+    { "title": "Tests that can fail", "page": "02-tests-that-can-fail.html", "topics": ["coding-agents", "evaluation"] },
+    { "title": "Find the cause, not a patch", "page": "03-find-the-cause.html", "topics": ["coding-agents", "planning"] },
+    { "title": "Catch the shortcuts", "page": "04-catch-the-shortcuts.html", "topics": ["coding-agents", "safety"] },
+    { "title": "A diff someone can review", "page": "05-a-diff-someone-can-review.html", "topics": ["coding-agents", "human-in-the-loop"] },
+    { "title": "Rules it can't ignore", "page": "06-rules-it-cant-ignore.html", "topics": ["coding-agents", "prompting"] },
+    { "title": "Proof the pack works", "page": "07-proof-the-pack-works.html", "topics": ["evaluation", "coding-agents"] }
+  ]
+}
