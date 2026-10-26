@@ -6,51 +6,113 @@
     "url": "https://georgehanu.github.io/",
     "x": "https://x.com/georgehanu",
     "github": "https://github.com/georgehanu",
-    "og": { "description": "Free practical guides and lessons for building software with AI" }
+    "og": {
+      "description": "Free practical guides and lessons for building software with AI"
+    }
   },
-
   "topics": [
-    { "id": "coding-agents", "label": "Coding agents" },
-    { "id": "agents", "label": "Agents" },
-    { "id": "tool-calling", "label": "Tool calling" },
-    { "id": "workflows", "label": "Workflows" },
-    { "id": "structured-output", "label": "Structured output" },
-    { "id": "evaluation", "label": "Evaluation" },
-    { "id": "safety", "label": "Safety" },
-    { "id": "human-in-the-loop", "label": "Human in the loop" },
-    { "id": "cost", "label": "Cost" },
-    { "id": "prompting", "label": "Prompting" },
-    { "id": "planning", "label": "Planning" },
-    { "id": "ux", "label": "UX" }
+    {
+      "id": "coding-agents",
+      "label": "Coding agents"
+    },
+    {
+      "id": "agents",
+      "label": "Agents"
+    },
+    {
+      "id": "tool-calling",
+      "label": "Tool calling"
+    },
+    {
+      "id": "workflows",
+      "label": "Workflows"
+    },
+    {
+      "id": "structured-output",
+      "label": "Structured output"
+    },
+    {
+      "id": "evaluation",
+      "label": "Evaluation"
+    },
+    {
+      "id": "safety",
+      "label": "Safety"
+    },
+    {
+      "id": "human-in-the-loop",
+      "label": "Human in the loop"
+    },
+    {
+      "id": "cost",
+      "label": "Cost"
+    },
+    {
+      "id": "prompting",
+      "label": "Prompting"
+    },
+    {
+      "id": "planning",
+      "label": "Planning"
+    },
+    {
+      "id": "ux",
+      "label": "UX"
+    }
   ],
-
   "start": [
-    { "if": "You already use a coding agent", "then": "and want better results from it", "guide": "beyond-it-works" },
-    { "if": "You want to know how agents work", "then": "by building a small one yourself", "guide": "the-agent-loop" },
-    { "if": "You want AI features in your app", "then": "that people can actually trust", "guide": "ai-buttons" }
+    {
+      "if": "You already use a coding agent",
+      "then": "and want better results from it",
+      "guide": "beyond-it-works"
+    },
+    {
+      "if": "You want to know how agents work",
+      "then": "by building a small one yourself",
+      "guide": "the-agent-loop"
+    },
+    {
+      "if": "You want AI features in your app",
+      "then": "that people can actually trust",
+      "guide": "ai-buttons"
+    }
   ],
-
   "series": [
     {
       "id": "use",
       "title": "Working with coding agents",
       "blurb": "Get reviewable, checkable work out of Claude Code, Codex and friends.",
-      "og": { "description": "Practical workflows for getting reviewable changes out of coding agents" },
-      "guides": ["beyond-it-works", "prove-it"]
+      "og": {
+        "description": "Practical workflows for getting reviewable changes out of coding agents"
+      },
+      "guides": [
+        "beyond-it-works",
+        "prove-it",
+        "slop-proof-ui"
+      ]
     },
     {
       "id": "inside",
       "title": "How agents work",
       "blurb": "Open the box: build the loop, then make it safe to ship.",
-      "og": { "description": "Build a small agent, then add the defences a real one needs" },
-      "guides": ["the-agent-loop", "harden-your-agent"]
+      "og": {
+        "description": "Build a small agent, then add the defences a real one needs"
+      },
+      "guides": [
+        "the-agent-loop",
+        "harden-your-agent"
+      ]
     },
     {
       "id": "apps",
       "title": "AI in real apps",
       "blurb": "Small AI features with schemas, checks and a person in charge.",
-      "og": { "description": "Small AI features built as practical workflows inside real software" },
-      "guides": ["ai-buttons"]
+      "og": {
+        "description": "Small AI features built as practical workflows inside real software"
+      },
+      "guides": [
+        "ai-buttons"
+      ]
     }
   ]
 }

@@ -1,0 +1,77 @@
+{
+  "id": "slop-proof-ui",
+  "title": "Slop-Proof UI",
+  "promise": "Make your coding agent's UI stop looking AI-made, and fail a check when it does.",
+  "og": {
+    "description": "Make your coding agent's UI stop looking AI-made, and fail a check when it does"
+  },
+  "url": "https://georgehanu.github.io/slop-proof-ui/",
+  "code": "https://github.com/georgehanu/slop-proof-ui",
+  "format": "Plugin + lessons",
+  "facts": [
+    "Claude Code plugin",
+    "WCAG 2.2 checks",
+    "Works in CI"
+  ],
+  "level": "You already use a coding agent",
+  "accent": "#7c3aed",
+  "published": "2026-10-26",
+  "lessons": [
+    {
+      "title": "What slop looks like, measured",
+      "page": "01-what-slop-looks-like.html",
+      "topics": [
+        "ux",
+        "evaluation"
+      ]
+    },
+    {
+      "title": "A DESIGN.md the gate can read",
+      "page": "02-a-design-md-the-gate-can-read.html",
+      "topics": [
+        "ux",
+        "coding-agents"
+      ]
+    },
+    {
+      "title": "Accessibility you can fail a build on",
+      "page": "03-accessibility-you-can-fail.html",
+      "topics": [
+        "ux",
+        "evaluation"
+      ]
+    },
+    {
+      "title": "The slop detector",
+      "page": "04-the-slop-detector.html",
+      "topics": [
+        "ux",
+        "evaluation"
+      ]
+    },
+    {
+      "title": "Make the agent run it",
+      "page": "05-make-the-agent-run-it.html",
+      "topics": [
+        "coding-agents",
+        "ux"
+      ]
+    },
+    {
+      "title": "Real stacks and CI",
+      "page": "06-real-stacks-and-ci.html",
+      "topics": [
+        "coding-agents",
+        "workflows"
+      ]
+    },
+    {
+      "title": "Proof the gate works",
+      "page": "07-proof-the-gate-works.html",
+      "topics": [
+        "evaluation",
+        "ux"
+      ]
+    }
+  ]
+}
